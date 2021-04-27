@@ -1,4 +1,4 @@
-from regex import regex_katapenting, regex_kodekuliah, regex_tanggal, regex_topik, regex_lihattask
+from regex import regex_katapenting, regex_kodekuliah, regex_tanggal, regex_topik, regex_lihattask, regex_get_nTask
 from KMP import KMP
 from function import *
 import datetime
@@ -45,21 +45,31 @@ for i in temp_database:
     print(i)
 
 def lihat_task(kalimat, database):
+    if "deadline" not in kalimat :
+        return False
+
     text = kalimat.lower()
     a = text.split()
     #  MASIH PERLU PERBAIKAN, RADA ANEH
-    keyword_seluruh = ["deadline", "sejauh", "ini", "dimiliki", "semua"]
+    # Keywordnya adalah "semua [kata_penting] deadline yang dimiliki sejauh ini"
+    keyword_seluruh = ["deadline", "semua", "dimiliki", "sejauh", "ini"]
     count = 0
     for pat in keyword_seluruh:
         for word in a:
             if (KMP(pat, word)):
                 count += 1
-
-    if (count > 3):
-        for task in temp_database:
-            print(task)
+    print(count)
+    if (count > 4):
+        task = regex_katapenting(text)
+        if (task != ""):
+            for deadline in temp_database:
+                if (deadline[2]==task):
+                    print(deadline)
+        else:
+            for deadline in temp_database:
+                print(deadline)
         print("LIHAT TASK END")
-        return
+        return True
     
     # Kemungkinan lain
     status, extract = regex_lihattask(text)
@@ -95,7 +105,7 @@ def lihat_task(kalimat, database):
                     end = True
         if (end):
             print("LIHAT TASK END")
-            return
+            return True
 
     elif (status[1]):   # N minggu ke depan
         extracted = int(extract[1].rsplit(" ")[0])
@@ -119,7 +129,7 @@ def lihat_task(kalimat, database):
                     end = True
         if (end):
             print("LIHAT TASK END")
-            return
+            return True
 
     elif (status[2]):   # N hari ke depan
         extracted = int(extract[2].rsplit(" ")[0])
@@ -142,7 +152,7 @@ def lihat_task(kalimat, database):
                     end = True
         if (end):
             print("LIHAT TASK END")
-            return
+            return True
 
     elif (status[3]):   # hari ini
         now = datetime.date.today()
@@ -162,8 +172,9 @@ def lihat_task(kalimat, database):
                     end = True
         if (end):
             print("LIHAT TASK END")
-            return
-
+            return True
+    
+    return False
 
 # # print("\n-----TES LIHAT TASK PERIODE TERTENTU-------")
 # # kalimat = "Apa saja yang tubes antara tanggal 02 april 2021 sampai 22 april 2021"
@@ -187,11 +198,15 @@ def lihat_task(kalimat, database):
 # # lihat_task(kalimat, temp_database)
 
 print("\n\n========TES LIHAT TASK HARI INI===========")
-lihat_task("Tampilkan semua deadline yang dimiliki sejauh ini", temp_database)
-print("")
-kalimat = "Apa saja deadline hari ini bot??"
+# lihat_task("Tampilkan semua deadline yang dimiliki sejauh ini", temp_database)
+# print("")
+kalimat = "Apa saja tugas hihi deadline hari ini?"
 print(kalimat)
-lihat_task(kalimat, temp_database)
+sukses = lihat_task(kalimat, temp_database)
+print(sukses)
+
+for i in temp_database:
+    print(i)
 
 
 
@@ -210,22 +225,36 @@ lihat_deadline(kalimat, temp_database)
 
 def ubah_deadline(kalimat, database):
     Found = False
-    text = kalimat.lower()
+    text = kalimat.lower().split(" ")
+    keyword = ["deadline", "diundur", "diubah", "task", "menjadi"]
+    count = 0
+    for pat in keyword:
+        for word in text:
+            if (KMP(pat, word)):
+                count += 1
+    print(count)
+    if (count < 4):
+        return False
+    idx = regex_get_nTask(kalimat)
+    if (idx < 1):
+        print("ID tidak valid")
+        return False
     for data in database:
         #bila ditemukan task dengan ID yang ada di database
-        if (KMP("task "+str(data[0])+" ", text)):
+        if (KMP(str(idx), str(data[0]))):
             data[1] = regex_tanggal(kalimat)
             print("Deadline task " + str(data[0]) +" berhasil diubah")
             Found = True
-            break
+            return Found
     if (not Found):
         print("Tidak terdapat task dengan ID tersebut")
+        return Found
 
 print("\n-----CEK ubah_deadline-------")
 print("Sebelum diubah")
 print(temp_database)
 
-kalimat = "Deadline task 1 diundur menjadi 28 mei 2024"
+kalimat = "Deadline task 4 diundur menjadi 28 mei 2024"
 #print(kalimat)
 ubah_deadline(kalimat, temp_database)
 
@@ -235,25 +264,47 @@ print(temp_database)
 
 def task_selesai(kalimat, database):
     Found = False
+    if "task" not in kalimat:
+        return False
+
     #global temp_database
-    text = kalimat.lower()
+    text = kalimat.lower().split(" ")
+    keyword = ["sudah", "selesai", "mengerjakan", "kelar", "menyelesaikan"]
+    count = 0
+    for pat in keyword:
+        for word in text:
+            if (KMP(pat, word)):
+                count += 1
+    if (count < 3):
+        return False
+
+    idx = regex_get_nTask(kalimat)
+    if (idx < 1):
+        print("ID tidak valid!")
+        return False
+
+    # ID valid
     for data in database:
         #bila ditemukan task dengan ID yang ada di database
-        if (KMP("task "+str(data[0])+" ", text)):
+        if (KMP(str(idx), str(data[0]))):
             print("Deadline task " + str(data[0]) +" berhasil dihapus")
             #database.pop(database.index(data))
             del database[database.index(data)]
             Found = True
-            break
+            return Found
+        
     if (not Found):
         print("Tidak terdapat task dengan ID tersebut")
+        return Found
 
-#ubah_deadline("tugas kuis tubes tucil", temp_database)
+# ubah_deadline("tugas kuis tubes tucil", temp_database)
 print("\n-----CEK task_selesai-------")
 print("AWAL")
-print(temp_database)
-kalimat = "Saya sudah selesai mengerjakan task 1 "#masih masalah klo ga pake spasi diakhir
+for i in temp_database:
+    print(i)
+kalimat = "Gue sudah kelar nih mengerjakan task 3"#masih masalah klo ga pake spasi diakhir
 #print(kalimat)
 task_selesai(kalimat, temp_database)
 print("AKHIR")
-print(temp_database)
+for i in temp_database:
+    print(i)

@@ -118,6 +118,16 @@ def regex_lihattask(kalimat):
     
     return status, extract
     
+def regex_get_nTask(kalimat):
+    pattern = r'task\s[0-9]{1,5}'
+    x = re.search(pattern, kalimat)
+
+    if x:
+        temp = x.group()
+        temp = temp.split(" ")[1]
+        return int(temp)
+    else:
+        return -1
 
 
 # status, extract = regex_lihattask("Coba blbalba antara tanggal 14 mei 2021 sampai 17 Mei 2021 ")
