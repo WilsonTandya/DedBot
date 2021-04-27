@@ -9,22 +9,19 @@ def regex_tanggal(tanggal):
     # pattern 2 = r'[0-9]{'
     x = re.search(pattern, tanggal)
     if x :
-        print(x.group())
         return x.group()
     else:
-        print("Tidak ketemu kode mata kuliah")
         return ""
 
 def regex_kodekuliah(kode):
-
+    kd = kode.lower()
     # Kode mata kuliah yang valid adalah IFXYAA, dimana X [1-9], Y [0-3], A [0-9]
-    pattern = r'IF[1-9][0-3][0-9][0-9]'
-    x = re.search(pattern, kode)
+    pattern = r'if[1-9][0-3][0-9][0-9]'
+    x = re.search(pattern, kd)
     if x:
         print(x.group())
         return x.group()
     else:
-        print("Tidak ketemu kode mata kuliah")
         return ""
 
 def regex_katapenting(kata):
@@ -34,10 +31,8 @@ def regex_katapenting(kata):
     x = re.search(pattern, kata)
 
     if (x):
-        # print(x.group())
         return x.group()
     else:
-        print("Tidak ketemu kata penting!")
         return ""
 
 def regex_topik(topik):
@@ -49,27 +44,11 @@ def regex_topik(topik):
     pattern = r'topik\s[a-zA-Z0-9-,_]+\s[a-zA-Z0-9-,_]+'
     # pattern = r'topik\s\w+(?:-\w+)+\s'
     x = re.search(pattern, topik)
+    
     if x:
-        print(x.group())
         return x.group()
     else:
-        print("Tidak ketemu topik")
         return ""
-
-# regex_tanggal("test 123 tanggal 13 april 2021")
-# regex_tanggal("test 123 tanggal 003 DeSember 2021")
-
-# regex_tanggal("test 123 tanggal 20 mei 2021")
-# regex_tanggal("Tambahkan tugas baru pada tanggal 22 juni 2021")
-
-# regex_kodekuliah("Mata kuliah IF1030 OKE MANTAP")
-
-regex_katapenting("Tolong tambahkan tucil TuBeS praktikuM deadline Tubes IF2211")
-
-regex_topik("Tubes IF2240 dengan topik string Matching gege")
-regex_topik("Halo tolong ingetin kalau ada kuis IF3110 dengan topik Bab 2_3 pada 22 April 2021")
-
-# Regex untuk melihat daftar deadline yang dimiliki
 
 def regex_lihattask(kalimat):
     kalimat = kalimat.lower()
@@ -137,15 +116,32 @@ def regex_tugas(kalimat):
     else:
         return ""
 
+# regex_tanggal("test 123 tanggal 13 april 2021")
+# regex_tanggal("test 123 tanggal 003 DeSember 2021")
+
+# regex_tanggal("test 123 tanggal 20 mei 2021")
+# regex_tanggal("Tambahkan tugas baru pada tanggal 22 juni 2021")
+
+# regex_kodekuliah("Mata kuliah IF1030 OKE MANTAP")
+
+# regex_katapenting("Tolong tambahkan tucil TuBeS praktikuM deadline Tubes IF2211")
+
+# regex_topik("Tubes IF2240 dengan topik string Matching gege")
+# regex_topik("Halo tolong ingetin kalau ada kuis IF3110 dengan topik Bab 2_3 pada 22 April 2021")
+
+# Regex untuk melihat daftar deadline yang dimiliki
+
+
+
 # status, extract = regex_lihattask("Coba blbalba antara tanggal 14 mei 2021 sampai 17 Mei 2021 ")
-status, extract = regex_lihattask("Apa saja deadline 3 minggu ke depan nih bot?")
+# status, extract = regex_lihattask("Apa saja deadline 3 minggu ke depan nih bot?")
 # regex_lihattask("Apa saja deadline 5 minggu ke depan")
 # regex_lihattask("apa saja deadline sejauh ini?")
 # regex_lihattask("apa saja sejauh ini? ada deadline apa saja")
-print(status)
-print(extract)
-print(extract[0].rsplit(" sampai "))
-print(extract[1].rsplit(" ")[0])
+# print(status)
+# print(extract)
+# print(extract[0].rsplit(" sampai "))
+# print(extract[1].rsplit(" ")[0])
 
 
 # print(konvert_tahun(extract[0].rsplit(" sampai ")[0]))
