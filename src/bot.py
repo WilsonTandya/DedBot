@@ -69,7 +69,7 @@ def lihat_task(kalimat, database):
             if (KMP(pat, word)):
                 count += 1
     print(count)
-    if (count > 4):
+    if (count >= 4):
         task = regex_katapenting(text)
         if (task != ""):
             for deadline in temp_database:
