@@ -27,9 +27,9 @@ def KMP(pat, txt):
             j += 1
   
         if (j == M):
-            print ("Ditemukan pada indeks ke- "+ str(i-j))
+            #print ("Ditemukan pada indeks ke- "+ str(i-j))
             return True
-            j = borderfunction[j-2]
+            #j = borderfunction[j-2]
         elif (i < N and pat[j] != txt[i]):
             if j != 0:
                 j = borderfunction[j-1]
@@ -39,4 +39,4 @@ def KMP(pat, txt):
 
 txt = "AAACAAACAAAA"
 pat = "AAACAAAA"
-KMP(pat, txt)
+print(KMP(pat, txt))
