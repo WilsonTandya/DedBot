@@ -25,7 +25,7 @@ def get_response():
         print(userInput)
         isichat.append(userInput)
         status_tambah, response_tambah = tambah_task(userInput, AUTO_INCREMENT)
-        status_lihat, response_lihat = lihat_task(userInput, temp_database)
+        status_lihat, response_lihat, status_regex = lihat_task(userInput, temp_database)
         status_dl, response_dl = lihat_deadline(userInput, temp_database)
         status_ubah, response_ubah = ubah_deadline(userInput, temp_database)
         status_selesai, response_selesai = task_selesai(userInput, temp_database)
@@ -45,11 +45,13 @@ def get_response():
                         f.write(a + " ")
                     f.write("\n")
             return render_template("home.html", lendata=len(isichat), isichat = isichat)
+            
         
         if (status_lihat):
             isichat.append(response_lihat)
             return render_template("home.html", lendata=len(isichat), isichat = isichat)
 
+        
         if (status_dl):
             isichat.append(response_dl)
             return render_template("home.html", lendata=len(isichat), isichat = isichat)
@@ -77,9 +79,33 @@ def get_response():
                         f.write(a + " ")
                     f.write("\n")
             return render_template("home.html", lendata=len(isichat), isichat = isichat)
-        
+
+        if (status_lihat == False):
+            if (status_regex != []):
+                if (status_regex[0] or status_regex[1] or status_regex[2] or status_regex[3]):
+                    isichat.append("---Kosong---")
+                    return render_template("home.html", lendata=len(isichat), isichat = isichat)
+
+
+        if (status_ubah == False):
+            if(response_ubah != ""):
+                isichat.append(response_ubah) 
+                return render_template("home.html", lendata=len(isichat), isichat = isichat)
+
+        if (status_selesai == False):
+            if (response_selesai != ""):
+                isichat.append(response_selesai)
+                return render_template("home.html", lendata=len(isichat), isichat = isichat)
+
+        if(status_dl == False):
+            if(response_dl != ""):
+                isichat.append(response_dl)
+                return render_template("home.html", lendata=len(isichat), isichat = isichat)
+
         isichat.append("Bot tidak mengenali pesanmu!")
+        
         return render_template("home.html", lendata=len(isichat), isichat = isichat)
+    
     else:
         print("TESTT")
         return render_template("home.html", lendata=len(isichat), isichat=isichat)
