@@ -8,7 +8,7 @@ AUTO_INCREMENT = 0
 temp_database = []
 
 i = 0
-with open("database.txt", "r") as f:
+with open("../test/database.txt", "r") as f:
     for deadline in f.readlines():
         if i==0 :
             AUTO_INCREMENT = int(deadline[0].rstrip("\n"))

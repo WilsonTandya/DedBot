@@ -12,7 +12,6 @@
             font-family: monospace;
           }
           h1 {
-            background-color: yellow;
             display: inline-block;
             font-size: 3em;
             margin: 0;
@@ -27,13 +26,13 @@
           #chatbox {
             margin-left: auto;
             margin-right: auto;
-            width: 40%;
+            width: 80%;
             margin-top: 60px;
           }
           #userInput {
             margin-left: auto;
             margin-right: auto;
-            width: 40%;
+            width: 70%;
             margin-top: 60px;
           }
           #textInput {
@@ -46,13 +45,13 @@
           .userText {
             color: white;
             font-family: monospace;
-            font-size: 17px;
+            font-size: 14px;
             text-align: right;
-            line-height: 30px;
+            line-height: 20px;
           }
           .userText span {
-            background-color: #808080;
-            padding: 10px;
+            color : blue;
+            padding: 8px;
             border-radius: 2px;
           }
           .botText {
@@ -90,9 +89,9 @@
           <h1>
             <img
               src="https://user-images.githubusercontent.com/20112458/49326597-773b7280-f57a-11e8-853d-20ed61d18b0d.png"
-              alt="CANDICE"
+              alt="Avatar"
               style="width:40px;height:40px;"
-            />Your Personal ChatBot
+            />DedBot
           </h1>
         </center>
     <div class="box"></div>
@@ -101,7 +100,7 @@
             <div id="chatbox">
               <img
                 src="https://user-images.githubusercontent.com/20112458/49326597-773b7280-f57a-11e8-853d-20ed61d18b0d.png"
-                alt="CANDICE"
+                alt="Avatar GIF"
                 style="width:40px;height:40px;"
               />
               <!-- <p class="botText">
@@ -109,11 +108,11 @@
               </p> -->
               {% for i in range (lendata)%}
                 {% if i % 2==0%}
-                <p>Chatbot: {{isichat[i]}}</p>
+                <p>Chatbot: <br>{{isichat[i]}}</p>
                 {% else %}
                 <p class="userText">
                     <span>
-                        You: {{isichat[i]}}</p>
+                        You: <br> {{isichat[i]}}</p>
                     </span>
                 {% endif %}
               {% endfor %}
