@@ -193,3 +193,67 @@ kalimat = "Apa saja deadline hari ini bot??"
 print(kalimat)
 lihat_task(kalimat, temp_database)
 
+
+
+#BOT2
+def lihat_deadline(kalimat, database):
+    kode_kuliah = regex_kodekuliah(kalimat)
+    for deadline in database:
+        if (kode_kuliah == deadline[3]):
+            print(deadline[1])
+
+print("\n-----CEK lihat_deadline-------")
+kalimat = "Deadline tugas IF2211 itu kapan?"
+lihat_deadline(kalimat, temp_database)
+
+
+
+def ubah_deadline(kalimat, database):
+    Found = False
+    text = kalimat.lower()
+    for data in database:
+        #bila ditemukan task dengan ID yang ada di database
+        if (KMP("task "+str(data[0])+" ", text)):
+            data[1] = regex_tanggal(kalimat)
+            print("Deadline task " + str(data[0]) +" berhasil diubah")
+            Found = True
+            break
+    if (not Found):
+        print("Tidak terdapat task dengan ID tersebut")
+
+print("\n-----CEK ubah_deadline-------")
+print("Sebelum diubah")
+print(temp_database)
+
+kalimat = "Deadline task 1 diundur menjadi 28 mei 2024"
+#print(kalimat)
+ubah_deadline(kalimat, temp_database)
+
+print("Setelah diubah")
+print(temp_database)
+
+
+def task_selesai(kalimat, database):
+    Found = False
+    #global temp_database
+    text = kalimat.lower()
+    for data in database:
+        #bila ditemukan task dengan ID yang ada di database
+        if (KMP("task "+str(data[0])+" ", text)):
+            print("Deadline task " + str(data[0]) +" berhasil dihapus")
+            #database.pop(database.index(data))
+            del database[database.index(data)]
+            Found = True
+            break
+    if (not Found):
+        print("Tidak terdapat task dengan ID tersebut")
+
+#ubah_deadline("tugas kuis tubes tucil", temp_database)
+print("\n-----CEK task_selesai-------")
+print("AWAL")
+print(temp_database)
+kalimat = "Saya sudah selesai mengerjakan task 1 "#masih masalah klo ga pake spasi diakhir
+#print(kalimat)
+task_selesai(kalimat, temp_database)
+print("AKHIR")
+print(temp_database)
