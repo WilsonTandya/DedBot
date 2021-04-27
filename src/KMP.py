@@ -1,14 +1,11 @@
-def KMP(pat, txt):
-    M = len(pat)
-    N = len(txt)
-
-    borderfunction = [0 for i in range (M-1)]
-    j = 0
+def KMP(path, txt):
+    #Buat borderfunction dari pattern
+    borderfunction = [0 for i in range (len(path)-1)]
   
     a = 0
     b = 1
-    while (b < M-1):
-        if pat[b]== pat[a]:
+    while (b < len(path)-1):
+        if path[b]== path[a]:
             a += 1
             borderfunction[b] = a
             b += 1
@@ -21,22 +18,22 @@ def KMP(pat, txt):
     # print(borderfunction)
   
     i = 0 
-    while (i < N):
-        if pat[j] == txt[i]:
+    j = 0
+    while (i < len(txt)):
+        if path[j] == txt[i]:
             i += 1
             j += 1
-  
-        if (j == M):
+        if (j == len(path)):
             #print ("Ditemukan pada indeks ke- "+ str(i-j))
             return True
-            #j = borderfunction[j-2]
-        elif (i < N and pat[j] != txt[i]):
+        elif (i < len(txt) and path[j] != txt[i]):
             if j != 0:
                 j = borderfunction[j-1]
             else:
                 i += 1
     return False
 
-txt = "AAACAAACAAAA"
-pat = "AAACAAAA"
-print(KMP(pat, txt))
+#Test
+#txt = "AAACAAACAAAA"
+#path = "AAACAAAA"
+#print(KMP(path, txt))
