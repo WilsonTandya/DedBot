@@ -101,8 +101,8 @@ def lihat_deadline(kalimat, database):
 
 print("\n-----CEK lihat_deadline-------")
 kalimat = "Deadline tugas IF2211 itu kapan?"
-print(kalimat)
 lihat_deadline(kalimat, temp_database)
+
 
 def ubah_deadline(kalimat, database):
     text = kalimat.lower()
@@ -118,10 +118,38 @@ def ubah_deadline(kalimat, database):
 print("\n-----CEK ubah_deadline-------")
 print("AWAL")
 print(temp_database)
+
 kalimat = "Deadline task 10 diundur menjadi 28 mei 2024"
+print(kalimat)
+ubah_deadline(kalimat, temp_database)
+
+print("AKHIR")
+print(temp_database)
+
+
+def task_selesai(kalimat, database):
+    Found = False
+    #global temp_database
+    text = kalimat.lower()
+    for data in database:
+        #bila ditemukan task dengan ID yang ada di database
+        if (KMP("task "+str(data[0])+" ", text)):
+            print("Deadline task " + str(data[0]) +" berhasil dihapus")
+            #database.pop(database.index(data))
+            #del database[[database.index(data)]]
+            #del temp_database[1]
+            Found = True
+            #break
+    if (Found == False):
+        print("Tidak terdapat task dengan ID tersebut")
+
+#ubah_deadline("tugas kuis tubes tucil", temp_database)
+print("\n-----CEK task_selesai-------")
+print("AWAL")
+print(temp_database)
+kalimat = "Saya sudah selesai mengerjakan task 1 "#masih masalah klo ga pake spasi diakhir
 print(kalimat)
 ubah_deadline(kalimat, temp_database)
 print("AKHIR")
 print(temp_database)
-
 
