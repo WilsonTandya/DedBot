@@ -58,9 +58,6 @@ def regex_lihattask(kalimat):
     pattern_N_minggu = r'[1-9]{1,3}\sminggu\ske\sdepan'
     pattern_N_hari = r'[0-9]{1,9}\shari\ske\sdepan'
     pattern_hari_ini = r'hari\sini'
-
-    # pattern_semua = r'deadline\ssejauh\sini'
-    # print(pattern_semua)
     
     a = re.search(pattern_periode, kalimat)
     b = re.search(pattern_N_minggu, kalimat)
@@ -115,35 +112,3 @@ def regex_tugas(kalimat):
         return x.group()
     else:
         return ""
-
-# regex_tanggal("test 123 tanggal 13 april 2021")
-# regex_tanggal("test 123 tanggal 003 DeSember 2021")
-
-# regex_tanggal("test 123 tanggal 20 mei 2021")
-# regex_tanggal("Tambahkan tugas baru pada tanggal 22 juni 2021")
-
-# regex_kodekuliah("Mata kuliah IF1030 OKE MANTAP")
-
-# regex_katapenting("Tolong tambahkan tucil TuBeS praktikuM deadline Tubes IF2211")
-
-# regex_topik("Tubes IF2240 dengan topik string Matching gege")
-# regex_topik("Halo tolong ingetin kalau ada kuis IF3110 dengan topik Bab 2_3 pada 22 April 2021")
-
-# Regex untuk melihat daftar deadline yang dimiliki
-
-
-
-# status, extract = regex_lihattask("Coba blbalba antara tanggal 14 mei 2021 sampai 17 Mei 2021 ")
-# status, extract = regex_lihattask("Apa saja deadline 3 minggu ke depan nih bot?")
-# regex_lihattask("Apa saja deadline 5 minggu ke depan")
-# regex_lihattask("apa saja deadline sejauh ini?")
-# regex_lihattask("apa saja sejauh ini? ada deadline apa saja")
-# print(status)
-# print(extract)
-# print(extract[0].rsplit(" sampai "))
-# print(extract[1].rsplit(" ")[0])
-
-
-# print(konvert_tahun(extract[0].rsplit(" sampai ")[0]))
-# print(konvert_bulan(extract[0].rsplit(" sampai ")[0]))
-# print(konvert_tanggal(extract[0].rsplit(" sampai ")[0]))

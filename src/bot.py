@@ -1,6 +1,6 @@
 from regex import regex_katapenting, regex_kodekuliah, regex_tanggal, regex_topik, regex_lihattask, regex_get_nTask, regex_tugas
 from KMP import KMP
-from function import *
+from function import konvert_tanggal, data_db_to_String
 import datetime
 
 AUTO_INCREMENT = 0
@@ -53,7 +53,6 @@ def tambah_task(kalimat, AUTO_INCREMENT):
     return True, response
 
 def lihat_task(kalimat, database):
-    print("------------MASUKKK------")
     response = ""
     if "deadline" not in kalimat.lower() :
         return False, response, []
@@ -69,6 +68,7 @@ def lihat_task(kalimat, database):
             if (KMP(pat, word)):
                 count += 1
     print(count)
+    response += "[DAFTAR DEADLINE]\n"
     if (count >= 4):
         task = regex_katapenting(text)
         if (task != ""):
@@ -85,9 +85,7 @@ def lihat_task(kalimat, database):
     status, extract = regex_lihattask(text)
     task = regex_katapenting(text)
     end = False
-    print("WOIIII____")
     print(status)
-    response += "[DAFTAR DEADLINE]\n"
     # Periode tertentu Tgl1 <= tgl_deadline <= tgl2
     if (status[0]):
         extracted = extract[0].rsplit(" sampai ")

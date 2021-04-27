@@ -1,6 +1,17 @@
+'''
+Tugas Besar 3 IF2211 Strategi Algoritma
+Deadline Chatbot implemented with KMP String Matching Algorithm and Regular Expression
+Created by:
+            Rizky Anggita S Siregar     13519132
+            Wilson Tandya               13519209
+
+April 28, 2021
+
+Institut Teknologi Bandung
+2021
+'''
 from flask import Flask, render_template, request
-# from regex import *
-from bot import tambah_task, lihat_task, lihat_deadline, ubah_deadline, task_selesai
+from bot import tambah_task, lihat_task, lihat_deadline, ubah_deadline, task_selesai, temp_database, AUTO_INCREMENT
 
 app = Flask(__name__)
 app.secret_key = 'secret key'
@@ -12,9 +23,6 @@ def home():
 
 isichat = []
 isichat.append("Halo Selamat Datang!")
-
-from bot import temp_database
-from bot import AUTO_INCREMENT
 
 
 @app.route("/text", methods=["POST", "GET"])
@@ -36,7 +44,7 @@ def get_response():
         if (status_tambah):
             isichat.append(response_tambah)
             AUTO_INCREMENT = AUTO_INCREMENT + 1
-            with open("database.txt", "w+") as f:
+            with open("../test/database.txt", "w+") as f:
                 f.write(str(AUTO_INCREMENT))
                 f.write("\n") 
                 for items in temp_database:
@@ -58,7 +66,7 @@ def get_response():
 
         if (status_ubah):
             isichat.append(response_ubah)
-            with open("database.txt", "w+") as f:
+            with open("../test/database.txt", "w+") as f:
                 f.write(str(AUTO_INCREMENT))
                 f.write("\n") 
                 for items in temp_database:
@@ -70,7 +78,7 @@ def get_response():
 
         if (status_selesai):
             isichat.append(response_selesai)
-            with open("database.txt", "w+") as f:
+            with open("../test/database.txt", "w+") as f:
                 f.write(str(AUTO_INCREMENT))
                 f.write("\n") 
                 for items in temp_database:
