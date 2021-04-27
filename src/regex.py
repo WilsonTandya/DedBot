@@ -34,7 +34,7 @@ def regex_katapenting(kata):
     x = re.search(pattern, kata)
 
     if (x):
-        print(x.group())
+        # print(x.group())
         return x.group()
     else:
         print("Tidak ketemu kata penting!")
@@ -68,3 +68,68 @@ regex_katapenting("Tolong tambahkan tucil TuBeS praktikuM deadline Tubes IF2211"
 
 regex_topik("Tubes IF2240 dengan topik string Matching gege")
 regex_topik("Halo tolong ingetin kalau ada kuis IF3110 dengan topik Bab 2_3 pada 22 April 2021")
+
+# Regex untuk melihat daftar deadline yang dimiliki
+
+def regex_lihattask(kalimat):
+    kalimat = kalimat.lower()
+    bulan = 'januari|februari|maret|april|mei|juni|juli|agustus|september|oktober|november|desember'
+    pattern_date = r'[0-9]{1,2}\s(' + bulan + ')' + r'\s[0-9]{4,4}'
+    pattern_periode = pattern_date + r'\ssampai\s' + pattern_date
+    pattern_N_minggu = r'[1-9]\sminggu\ske\sdepan'
+    pattern_N_hari = r'[1-9]\shari\ske\sdepan'
+    pattern_hari_ini = r'hari\sini'
+
+    # pattern_semua = r'deadline\ssejauh\sini'
+    # print(pattern_semua)
+    
+    a = re.search(pattern_periode, kalimat)
+    b = re.search(pattern_N_minggu, kalimat)
+    c = re.search(pattern_N_hari, kalimat)
+    d = re.search(pattern_hari_ini, kalimat)
+    
+    status = []
+    extract = []
+
+    if a:
+        status.append(True)
+        extract.append(a.group())
+    else:
+        status.append(False)
+        extract.append("")
+    if b:
+        status.append(True)
+        extract.append(b.group())
+    else:
+        status.append(False)
+        extract.append("")
+    if c:
+        status.append(True)
+        extract.append(c.group())
+    else:
+        status.append(False)
+        extract.append("")
+    if d:
+        status.append(True)
+        extract.append(d.group())
+    else:
+        status.append(False)
+        extract.append("")
+    
+    return status, extract
+    
+
+
+status, extract = regex_lihattask("Coba blbalba antara tanggal 14 mei 2021 sampai 17 Mei 2021 ")
+# regex_lihattask("Apa saja deadline 5 minggu ke depan")
+# regex_lihattask("apa saja deadline sejauh ini?")
+# regex_lihattask("apa saja sejauh ini? ada deadline apa saja")
+print(status)
+print(extract)
+print(extract[0].rsplit(" sampai "))
+
+
+
+# print(konvert_tahun(extract[0].rsplit(" sampai ")[0]))
+# print(konvert_bulan(extract[0].rsplit(" sampai ")[0]))
+# print(konvert_tanggal(extract[0].rsplit(" sampai ")[0]))
