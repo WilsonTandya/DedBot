@@ -89,3 +89,8 @@ def tanggal_greater_than_eq(tgl1, tgl2):
     
     # tahun1 = tahun2, bulan1 = bulan2, hari1 = hari2
     return True
+
+def data_db_to_String(data):
+    response = ""
+    response += "(ID: " + str(data[0]) + ") - " + (data[1].upper()) + " - " + data[2].upper() + " - " + data[3].upper() + " - " + data[4].upper()
+    return response

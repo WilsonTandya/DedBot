@@ -129,6 +129,13 @@ def regex_get_nTask(kalimat):
     else:
         return -1
 
+def regex_tugas(kalimat):
+    pattern = r'tugas'
+    x = re.search(pattern, kalimat.lower())
+    if x:
+        return x.group()
+    else:
+        return ""
 
 # status, extract = regex_lihattask("Coba blbalba antara tanggal 14 mei 2021 sampai 17 Mei 2021 ")
 status, extract = regex_lihattask("Apa saja deadline 3 minggu ke depan nih bot?")
