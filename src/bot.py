@@ -291,7 +291,7 @@ def task_selesai(kalimat, database):
         return Found, response
 
 def help_bot(kalimat):
-    txt = kalimat.lower()
+    txt = kalimat.lower().split(" ")
     response = "[Fitur]\n"
     response += "1. Melihat Daftar Task\n"
     response += "2. Menambahkan Task Baru\n"
@@ -304,7 +304,7 @@ def help_bot(kalimat):
     if "help" in txt:
         return True, response
     
-    keyword = ["Apa", "bisa", "dilakukan", "bot", "assistant"]
+    keyword = ["apa", "bisa", "dilakukan", "bot", "assistant"]
     count = 0
     for pat in keyword:
         for word in txt:
