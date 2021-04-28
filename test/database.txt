@@ -1,5 +1,5 @@
-4
-1 29 mei 2021 tucil if2140 topik index tuning 
-2 7 mei 2021 ujian if2130 topik setelah uts 
-3 25 mei 2021 kuis if2110 topik bab 2-3 
-4 28 mei 2021 tucil if2149 topik index tuning 
+6
+1 30 april 2021 tubes if2211 topik string matching 
+4 13 mei 2021 tucil if2250 topik astar algorithm 
+5 18 mei 2021 ujian if2210 topik setelah uts 
+6 10 juni 2021 tubes if2250 topik skpl dokumen 
