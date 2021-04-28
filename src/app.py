@@ -19,17 +19,17 @@ app.secret_key = 'secret key'
 
 @app.route("/")
 def home():
-    return ("HELLO WORLD!")
+    return render_template("landing.html")
 
 isichat = []
 isichat.append("Halo Selamat Datang!")
 
 
-@app.route("/text", methods=["POST", "GET"])
+@app.route("/dedbot", methods=["POST", "GET"])
 def get_response():
     if request.method == "POST":
         global AUTO_INCREMENT
-        userInput = request.form.get("saya")
+        userInput = request.form.get("userInput")
         print(userInput)
         isichat.append(userInput)
         status_tambah, response_tambah = tambah_task(userInput, AUTO_INCREMENT)
@@ -52,17 +52,17 @@ def get_response():
                         a = str(item)
                         f.write(a + " ")
                     f.write("\n")
-            return render_template("home.html", lendata=len(isichat), isichat = isichat)
+            return render_template("dedbot.html", lendata=len(isichat), isichat = isichat)
             
         
         if (status_lihat):
             isichat.append(response_lihat)
-            return render_template("home.html", lendata=len(isichat), isichat = isichat)
+            return render_template("dedbot.html", lendata=len(isichat), isichat = isichat)
 
         
         if (status_dl):
             isichat.append(response_dl)
-            return render_template("home.html", lendata=len(isichat), isichat = isichat)
+            return render_template("dedbot.html", lendata=len(isichat), isichat = isichat)
 
         if (status_ubah):
             isichat.append(response_ubah)
@@ -74,7 +74,7 @@ def get_response():
                         a = str(item)
                         f.write(a + " ")
                     f.write("\n")
-            return render_template("home.html", lendata=len(isichat), isichat = isichat)
+            return render_template("dedbot.html", lendata=len(isichat), isichat = isichat)
 
         if (status_selesai):
             isichat.append(response_selesai)
@@ -86,37 +86,36 @@ def get_response():
                         a = str(item)
                         f.write(a + " ")
                     f.write("\n")
-            return render_template("home.html", lendata=len(isichat), isichat = isichat)
+            return render_template("dedbot.html", lendata=len(isichat), isichat = isichat)
 
         if (status_lihat == False):
             if (status_regex != []):
                 if (status_regex[0] or status_regex[1] or status_regex[2] or status_regex[3]):
                     isichat.append("---Kosong---")
-                    return render_template("home.html", lendata=len(isichat), isichat = isichat)
+                    return render_template("dedbot.html", lendata=len(isichat), isichat = isichat)
 
 
         if (status_ubah == False):
             if(response_ubah != ""):
                 isichat.append(response_ubah) 
-                return render_template("home.html", lendata=len(isichat), isichat = isichat)
+                return render_template("dedbot.html", lendata=len(isichat), isichat = isichat)
 
         if (status_selesai == False):
             if (response_selesai != ""):
                 isichat.append(response_selesai)
-                return render_template("home.html", lendata=len(isichat), isichat = isichat)
+                return render_template("dedbot.html", lendata=len(isichat), isichat = isichat)
 
         if(status_dl == False):
             if(response_dl != ""):
                 isichat.append(response_dl)
-                return render_template("home.html", lendata=len(isichat), isichat = isichat)
+                return render_template("dedbot.html", lendata=len(isichat), isichat = isichat)
 
         isichat.append("Bot tidak mengenali pesanmu!")
         
-        return render_template("home.html", lendata=len(isichat), isichat = isichat)
+        return render_template("dedbot.html", lendata=len(isichat), isichat = isichat)
     
     else:
-        print("TESTT")
-        return render_template("home.html", lendata=len(isichat), isichat=isichat)
+        return render_template("dedbot.html", lendata=len(isichat), isichat=isichat)
 
 
 

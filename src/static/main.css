@@ -1,0 +1,80 @@
+body {
+    font-family: monospace;
+  }
+  h1 {
+    display: inline-block;
+    font-size: 3em;
+    margin: 0;
+    padding: 14px;
+  }
+  h3 {
+    color: black;
+    font-size: 20px;
+    margin-top: 3px;
+    text-align: center;
+  }
+  #chatbox {
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+    margin-top: 60px;
+  }
+  .form-group {
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+    margin-top: 60px;
+    margin-bottom: 0%;
+  }
+  #textInput {
+    width: 90%;
+    border: none;
+    border-bottom: 3px solid black;
+    font-family: monospace;
+    font-size: 17px;
+  }
+  .userText {
+    color: white;
+    font-family: monospace;
+    font-size: 14px;
+    text-align: right;
+    line-height: 15px;
+  }
+  .userText span {
+    color : blue;
+    padding: 8px;
+    border-radius: 2px;
+  }
+  .botText {
+    color: chocolate;
+    font-family: monospace;
+    font-size: 14px;
+    text-align: left;
+    line-height: 15px;
+  } 
+
+  .boxed {
+    margin-left: auto;
+    margin-right: auto;
+    width: 78%;
+    margin-top: 60px;
+    border: 1px solid chocolate;
+  }
+  .box {
+    border: 2px solid chocolate;
+  }
+  .bg-steel {
+    background-color: chocolate;
+  }
+  
+  .site-header .navbar-nav .nav-link {
+    color: #cbd5db;
+  }
+  
+  .site-header .navbar-nav .nav-link:hover {
+    color: #ffffff;
+  }
+  
+  .site-header .navbar-nav .nav-link.active {
+    font-weight: 500;
+  }
