@@ -47,7 +47,7 @@ def tambah_task(kalimat, AUTO_INCREMENT):
     new_data.append(topik)
     temp_database.append(new_data)
     # AUTO_INCREMENT += 1
-    response = "[TASK BERHASIL DICATAT]n\n"
+    response = "[TASK BERHASIL DICATAT]\n"
     response += "(ID: " + str(ID) + ") - " + (tanggal.upper()) + " - " + task.upper() + " - " + kode_kuliah.upper() + " - " + topik.upper()
     response += "\n" 
     return True, response
