@@ -11,7 +11,7 @@ Institut Teknologi Bandung
 2021
 '''
 from flask import Flask, render_template, request
-from bot import tambah_task, lihat_task, lihat_deadline, ubah_deadline, task_selesai, temp_database, AUTO_INCREMENT
+from bot import tambah_task, lihat_task, lihat_deadline, ubah_deadline, task_selesai, temp_database, AUTO_INCREMENT, help_bot
 
 app = Flask(__name__)
 app.secret_key = 'secret key'
@@ -37,10 +37,12 @@ def get_response():
         status_dl, response_dl = lihat_deadline(userInput, temp_database)
         status_ubah, response_ubah = ubah_deadline(userInput, temp_database)
         status_selesai, response_selesai = task_selesai(userInput, temp_database)
+        status_help, response_help = help_bot(userInput)
         
         print(temp_database)
+        # print(isichat)
         print("GW segini: " + str(AUTO_INCREMENT))
-        
+   
         if (status_tambah):
             isichat.append(response_tambah)
             AUTO_INCREMENT = AUTO_INCREMENT + 1
@@ -88,6 +90,10 @@ def get_response():
                     f.write("\n")
             return render_template("dedbot.html", lendata=len(isichat), isichat = isichat)
 
+        if (status_help):
+            isichat.append(response_help)
+            return render_template("dedbot.html", lendata=len(isichat), isichat = isichat)
+        
         if (status_lihat == False):
             if (status_regex != []):
                 if (status_regex[0] or status_regex[1] or status_regex[2] or status_regex[3]):
@@ -111,7 +117,6 @@ def get_response():
                 return render_template("dedbot.html", lendata=len(isichat), isichat = isichat)
 
         isichat.append("Bot tidak mengenali pesanmu!")
-        
         return render_template("dedbot.html", lendata=len(isichat), isichat = isichat)
     
     else:

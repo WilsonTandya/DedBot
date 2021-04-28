@@ -47,7 +47,7 @@ def tambah_task(kalimat, AUTO_INCREMENT):
     new_data.append(topik)
     temp_database.append(new_data)
     # AUTO_INCREMENT += 1
-    response = "[TASK BERHASIL DICATAT\n"
+    response = "[TASK BERHASIL DICATAT]n\n"
     response += "(ID: " + str(ID) + ") - " + (tanggal.upper()) + " - " + task.upper() + " - " + kode_kuliah.upper() + " - " + topik.upper()
     response += "\n" 
     return True, response
@@ -85,6 +85,7 @@ def lihat_task(kalimat, database):
     status, extract = regex_lihattask(text)
     task = regex_katapenting(text)
     end = False
+    print("WOWWWWWW")
     print(status)
     # Periode tertentu Tgl1 <= tgl_deadline <= tgl2
     if (status[0]):
@@ -289,6 +290,31 @@ def task_selesai(kalimat, database):
         response += "Tidak terdapat task dengan ID tersebut"
         return Found, response
 
+def help_bot(kalimat):
+    txt = kalimat.lower()
+    response = "[Fitur]\n"
+    response += "1. Melihat Daftar Task\n"
+    response += "2. Menambahkan Task Baru\n"
+    response += "3. Menampilkan Deadline Suatu Task\n"
+    response += "4. Memperbaharui Task Tertentu\n"
+    response += "5. Menandai bahwa suatu Task sudah selesai dikerjakan\n"
+    response += "6. Menampilkan opsi help\n"
+    response += "\n[Daftar Kata Penting]\n"
+    response += "1. Kuis\n2. Ujian\n3. Tucil\n4. Tubes\n5. Praktikum\n"
+    if "help" in txt:
+        return True, response
+    
+    keyword = ["Apa", "bisa", "dilakukan", "bot", "assistant"]
+    count = 0
+    for pat in keyword:
+        for word in txt:
+            if (KMP(pat, word)):
+                count += 1
+    print(count)
+    if (count < 4):
+        return False, ""
+    
+    return True, response
 # ubah_deadline("tugas kuis tubes tucil", temp_database)
 # print("\n-----CEK task_selesai-------")
 # print("AWAL")

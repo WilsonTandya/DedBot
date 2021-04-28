@@ -3,13 +3,10 @@
     <head>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
+        <script>window.scrollTo(0,document.body.scrollHeight)</script>
     </head>
     <body class="d-flex flex-column h-100">
-        <center>
-          <!-- <h1>&lt DedBot &gt
-          </h1> <br> -->
           <img src="https://i.ibb.co/LhNzC6C/Avatar-GIF.gif" alt="Avatar-GIF" border="0" style="width:40px;height:40px;">
-        </center>
       <div class="box">
         <div class="jumbotron">
           <div>
@@ -25,12 +22,16 @@
                       <a class="nav-item nav-link" href="/dedbot">DedBot</a>
                   </div>
                 </div>
-                <img src="https://i.ibb.co/LhNzC6C/Avatar-GIF.gif" alt="Avatar-GIF" border="0" style="width:40px;height:40px;">
+                DedBot
               </nav>
                  <img src="https://i.ibb.co/LhNzC6C/Avatar-GIF.gif" alt="Avatar-GIF" border="0" style="width:40px;height:40px;">
                   {% for i in range (lendata)%}
                     {% if i % 2==0%}
-                      <p class="botText">DedBot: <br>{{isichat[i]}}</p>
+                      <p class="botText">DedBot:
+                        {% for word in isichat[i].split("\n")  %}
+                            <br>{{word}}
+                        {% endfor %}    
+                      </p>
                     {% else %}
                       <p class="userText">
                         <span>
@@ -44,7 +45,7 @@
             <form action="#" method="POST">
                 <div class="form-group">
                     <label for="textInput">Pesan</label>
-                    <input id="textInput" type="text" name="userInput" placeholder="Message" class="form-control" />
+                    <input id="textInput" type="text" name="userInput" placeholder="Message" class="form-control" autofocus />
                 </div>
             </form>
             
