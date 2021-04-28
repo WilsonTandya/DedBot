@@ -15,8 +15,7 @@ def KMP(path, txt):
             else:
                 borderfunction[b] = 0
                 b += 1
-    # print(borderfunction)
-  
+
     i = 0 
     j = 0
     while (i < len(txt)):
@@ -24,7 +23,6 @@ def KMP(path, txt):
             i += 1
             j += 1
         if (j == len(path)):
-            #print ("Ditemukan pada indeks ke- "+ str(i-j))
             return True
         elif (i < len(txt) and path[j] != txt[i]):
             if j != 0:
@@ -32,8 +30,3 @@ def KMP(path, txt):
             else:
                 i += 1
     return False
-
-#Test
-#txt = "AAACAAACAAAA"
-#path = "AAACAAAA"
-#print(KMP(path, txt))

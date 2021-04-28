@@ -3,10 +3,9 @@ import re
 def regex_tanggal(tanggal):
     # Tanggal dengan format XX NAMA_BULAN YYYY
     tanggal = tanggal.lower()
-    # print(tanggal)
     bulan = 'januari|februari|maret|april|mei|juni|juli|agustus|september|oktober|november|desember'
     pattern = r'[0-9]{1,2}\s(' + bulan + ')' + r'\s[0-9]{4,4}'
-    # pattern 2 = r'[0-9]{'
+
     x = re.search(pattern, tanggal)
     if x :
         return x.group()
@@ -19,7 +18,6 @@ def regex_kodekuliah(kode):
     pattern = r'if[1-9][0-3][0-9][0-9]'
     x = re.search(pattern, kd)
     if x:
-        print(x.group())
         return x.group()
     else:
         return ""
@@ -42,7 +40,7 @@ def regex_topik(topik):
     # maka topik: String Matching
     topik = topik.lower()
     pattern = r'topik\s[a-zA-Z0-9-,_]+\s[a-zA-Z0-9-,_]+'
-    # pattern = r'topik\s\w+(?:-\w+)+\s'
+
     x = re.search(pattern, topik)
     
     if x:

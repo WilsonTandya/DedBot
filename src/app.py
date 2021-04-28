@@ -30,7 +30,6 @@ def get_response():
     if request.method == "POST":
         global AUTO_INCREMENT
         userInput = request.form.get("userInput")
-        print(userInput)
         isichat.append(userInput)
         status_tambah, response_tambah = tambah_task(userInput, AUTO_INCREMENT)
         status_lihat, response_lihat, status_regex = lihat_task(userInput, temp_database)
@@ -39,10 +38,6 @@ def get_response():
         status_selesai, response_selesai = task_selesai(userInput, temp_database)
         status_help, response_help = help_bot(userInput)
         
-        print(temp_database)
-        # print(isichat)
-        print("GW segini: " + str(AUTO_INCREMENT))
-   
         if (status_tambah):
             isichat.append(response_tambah)
             AUTO_INCREMENT = AUTO_INCREMENT + 1
